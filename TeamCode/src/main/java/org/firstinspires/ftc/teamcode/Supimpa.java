@@ -35,7 +35,7 @@ public class Supimpa extends LinearOpMode{
 
         while (opModeIsActive()) {
 
-            double velocity = (gamepad1.right_trigger*0.7)+0.3;
+            double velocity = (gamepad1.right_trigger * 0.7) + 0.3;
             double x = gamepad1.left_stick_x * velocity;
             double y = gamepad1.left_stick_y * velocity;
             double esquerdaPower = y+x;
