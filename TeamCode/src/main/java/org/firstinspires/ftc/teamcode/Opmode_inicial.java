@@ -114,7 +114,7 @@ public class Opmode_inicial extends LinearOpMode {
         botões e servos.
         é também definido os modos em que servos e motores vão operar
         */
-        Carrossel = hardwareMap.get(DcMotorEx.class, "Carrossel");
+        Carrossel = hardwareMap.get(DcMotorEx.class, "motorCarrossel");
         motorFrontLeft = hardwareMap.get(DcMotorEx.class,"motorFrontLeft");
         motorBackLeft = hardwareMap.get(DcMotorEx.class,"motorBackLeft");
         motorFrontRight = hardwareMap.get(DcMotorEx.class,"motorFrontRight");

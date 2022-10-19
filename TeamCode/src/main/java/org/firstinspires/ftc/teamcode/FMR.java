@@ -55,7 +55,7 @@ public class FMR extends LinearOpMode {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
 
-        Carrossel = hardwareMap.get(DcMotorEx.class, "Carrossel");
+        Carrossel = hardwareMap.get(DcMotorEx.class, "motorCarrossel");
         motorFrontLeft = hardwareMap.get(DcMotorEx.class, "motorFrontLeft");
         motorBackLeft = hardwareMap.get(DcMotorEx.class, "motorBackLeft");
         motorFrontRight = hardwareMap.get(DcMotorEx.class, "motorFrontRight");
@@ -188,17 +188,32 @@ public class FMR extends LinearOpMode {
                 PosX = -0.087;
                 PosY = -0.021;
             }
-            if(gamepad2.dpad_up){
+            if(gamepad2.dpad_up == true){
                 PosX = -0.137;
                 PosY = 0.029;
                 phi = Math.toRadians(200);
             }
-            if(gamepad2.dpad_left){
-                PosX = -0.174;
-                PosY = -0.155;
-                phi = Math.toRadians(268);
+            if(gamepad2.dpad_left == true){
+                PosX = 0.161;
+                PosY = 0.004;
+                phi = Math.toRadians(222.3);
             }
             braco2.setPos(PosX, PosY, phi);
+
+            double dist = distSensor.getDistance(DistanceUnit.CM);
+            if((!Double.isNaN(dist)) && dist < 15){ //detectou cubo?
+                //erguida
+                servobandeira.setPosition(1);
+                if (lastDetectedCube == false)
+                {
+                    gamepad2.rumble(0,1.0,300);
+                }
+                lastDetectedCube = true;
+            }else{
+                lastDetectedCube = false;
+                //abaixada
+                servobandeira.setPosition(0);
+            }
 
             double ombro = braco2.getTe1();
             double cotovelo = braco2.getTe2();
